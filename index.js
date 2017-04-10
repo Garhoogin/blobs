@@ -6,6 +6,9 @@ window.onload = function(){
 	var height = document.querySelector("canvas").height;
 	var scrnArea = window.innerWidth * window.innerHeight;
 	maxBlobs = scrnArea / 3500;
+	if(localStorage.getItem("maxBlobs")){
+		maxBlobs = Number(localStorage.getItem("maxBlobs"));
+	}
 	var rippleno = 0;
 	var inripple = false;
 	var queripple = false;
@@ -16,6 +19,13 @@ window.onload = function(){
 		if(key == 40) maxBlobs --;
 		if(key == 32){
 			for(var i = 0; i < maxBlobs; i++) blobs[i].lastMovedRadian -= Math.PI;
+		}
+		if(key == 83){
+			localStorage.setItem("maxBlobs", String(maxBlobs));
+		}
+		if(key == 82 && !e.ctrlKey){
+			maxBlobs = scrnArea / 3500;
+			localStorage.setItem("maxBlobs", String(maxBlobs));
 		}
 		if(maxBlobs < 0) maxBlobs = 0;
 	});
